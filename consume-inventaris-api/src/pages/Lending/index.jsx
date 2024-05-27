@@ -143,11 +143,19 @@ export default function Lending() {
                                                 <span>Sudah Kembali</span>
                                             )}
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                            <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>
-                                            <button type="button" className="px-4 py-2 bg-gray-500 rounded-lg mr-2 font-bold text-white">Batal</button>
-                                            <Link to={'/lending/restoration/' + lending.id} type="button" className="px-4 py-2 bg-green-500 rounded-lg font-bold text-white">Kembali</Link>                                        
-                                        </td>
+                                        <td className="">
+                                            {lending.status == 0 ? (
+                                                <td className="whitespace-nowrap px-6 py-4">
+                                                <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>
+                                                <button onClick={() => deleteLending(lending)} className="px-4 py-2 bg-gray-500 rounded-lg mr-2 font-bold text-white">Batal</button>
+                                                <Link to={'/lending/restoration/' + lending.id} type="button" className="px-4 py-2 bg-green-500 rounded-lg font-bold text-white">Kembali</Link>                                        
+                                            </td>
+                                            ) : (
+                                                <td className="whitespace-nowrap px-6 py-4">
+                                                <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>                                        
+                                            </td>
+                                                )}
+                                            </td>
                                     </tr>
                                 ) )}
                             </tbody>

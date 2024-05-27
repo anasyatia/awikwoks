@@ -25,7 +25,7 @@ export default function LendingReturn({data, onClose}) {
     const handleReturnLend = (event) => {
         event.preventDefault();
 
-        instance.post(`restorations/5`, forms)
+        instance.post(`restorations/7`, forms)
            .then(res => {
                 Swal.fire({
                     icon:'success',
@@ -33,7 +33,7 @@ export default function LendingReturn({data, onClose}) {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                onClose();
+                navigate('/lending');
             })
            .catch(err => {
                 setError(err.response.data.data)
@@ -64,13 +64,33 @@ export default function LendingReturn({data, onClose}) {
 
             {}
 
-            <div className="flex justify-center">
-                        <h5 className="mb-1 ml-5 text-3xl font-medium text-gray-900 dark:text-white">User</h5>
-                    </div>
+            {lending ? (
+                <table className="mx-2">
+                    <tr>
+                        <td className="font-bold">Detail Barang</td>
+                    </tr>
+                    <tr>
+                        <td>Barang</td>
+                        <td>:</td>
+                        <td>{ lending.stuff.name }</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal</td>
+                        <td>:</td>
+                        <td>{ lending.date_time }</td>
+                    </tr>
+                    <tr>
+                        <td>Total barang yang ingin dipinjam</td>
+                        <td>:</td>
+                        <td>{ lending.total_stuff }</td>
+                    </tr>
+                </table>
+            ) : ''}
+
                     <form onSubmit={handleReturnLend} class="max-w-sm mx-auto">
                         <div class="mb-5">  
                             <label for="date_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal kembali</label>
-                            <input type="date" id="date_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik Tanggal Kembali" required  onChange={e => setForms({...forms, date_time: e.target.value})} />
+                            <input type="datetime-local" id="date_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik Tanggal Kembali" required  onChange={e => setForms({...forms, date_time: e.target.value})} />
                         </div>
                         <div class="mb-5">
                             <label for="total_good_stuff" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total barang bagus</label>

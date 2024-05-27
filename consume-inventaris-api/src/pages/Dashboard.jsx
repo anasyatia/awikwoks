@@ -1,7 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Case from "./../components/case";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Dashboard() {
+    const [stuffs, setStuffs] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     getDataStuffs();
+    //     getDataUsers();
+    //     getDataLendings();
+    // }, [checkProses]);
+
+    // function getDataStuffs(){
+    //     axios.get('http://localhost:8000/api/stuffs', {
+    //         headers: {
+    //             'Authorization': 'Bearer'+ localStorage.getItem('access_token'),
+    //         }
+    //     })
+    //     .then(res => {
+    //         setStuffs(res.data.data);
+    //     })
+
+    //     .catch(err => {
+    //         if (err.response.status == 401) {
+    //             navigate('/login?massage=' + encodeURIComponent('Anda belum login!'));
+    //         }
+    //     })
+    // }
+
+    // function getDataUsers() {
+    //     axios.get('http://localhost:8000/api/stuffs', {
+    //         headers: {
+    //             'Authorization': 'Bearer'+ localStorage.getItem('access_token'),
+    //         }
+    //     })
+    //     .then(res => {
+    //         setUsers(res.data.data);
+    //     })
+
+    //     .catch(err => {
+    //         if (err.response.status == 401) {
+    //             navigate('/login?massage=' + encodeURIComponent('Anda belum login!'));
+    //         }
+    //     })
+    // }
+
+    // function getDataLendings() {
+    //     axios.get('http://localhost:8000/api/stuffs', {
+    //         headers: {
+    //             'Authorization': 'Bearer'+ localStorage.getItem('access_token'),
+    //         }
+    //     })
+    //    .then(res => {
+    //      const data = res.data.data;
+
+    //      const groupedData = {};
+    //      data.forEach((entry) => {
+    //         const date = new Date(entry.date_time);
+    //         const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+    //         if (!groupedData[formattedDate]) {
+    //             groupedData[formattedDate] = [];
+    //         }
+    //         groupedData[formattedDate].push(entry);
+    //      });
+
+    //      const processedData = Object.keys(groupedData).map((date) => ({
+    //         date,
+    //         totalStuff: groupedData[date].reduce((acc, entry) => acc + entry.total.stuff, 0)
+    //      }));
+
+    //      setLendingGrouped(processedData);
+    //      setCheckProses(true)
+    //    })
+
+    //    .catch(err => {
+    //         if (err.response.status == 401) {
+    //             navigate('/login?massage=' + encodeURIComponent('Anda belum login!'));
+    //         }
+    //     })
+    // }
+
     return (
         <Case>
             <div className="flex flex-wrap justify-center m-10">
