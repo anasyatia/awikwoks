@@ -22,6 +22,7 @@ export default function Stuff() {
         instance.get('stuffs')
         .then(res => {
             setStuffs(res.data.data);
+            console.log(res.data.data);
         })
         .catch(err => {
             if(err.response.status === 401) {
@@ -33,7 +34,7 @@ export default function Stuff() {
     const deleteStuff = (id) => {
         Swal.fire({
             title: 'Apakah kamu yakin?',
-            text: "Item akan dihapus sementara, kamu dapat restore stuff ini di page trash!",
+            text: "Item akan dihapus sementara, kamu dapat restore data ini di page trash!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -64,7 +65,7 @@ export default function Stuff() {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Ada kesalahan saat menghapus item.',
+                            text: 'Stock sudah terisi, tidak bisa menghapus!',
                             footer: '<a href="#">Hubungi admin jika masalah persist.</a>'
                         });
                     });
@@ -85,7 +86,7 @@ export default function Stuff() {
                     <strong>Kategori:</strong> ${stuff.category}
                 </div>
                 <div class="mb-4">
-                    <strong>Stok:</strong> ${stuff.stock ? stuff.stock.total_available : 'Stok belum ditambahkan'}
+                    <strong>Stok:</strong> ${stuff.stuff_stock ? stuff.stuff_stock.total_available : 'Stok belum ditambahkan'}
                 </div>
             `,
             showCancelButton: false,
@@ -133,7 +134,7 @@ export default function Stuff() {
                     <div className="flex mt-4 md:mt-6">
                         <table className="min-w-full text-left text-sm font-light">
                             <thead className="border-b font-medium dark:border-neutral-500 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
+                                <tr className="text-center">
                                     <th scope="col" className="px-6 py-4">No</th>
                                     <th scope="col" className="px-6 py-4">Name</th>
                                     <th scope="col" className="px-6 py-4">Category</th>
@@ -141,16 +142,16 @@ export default function Stuff() {
                                     <th scope="col" className="px-6 py-4">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-center">
                                     {stuffs.map((stuff, id) => (
                                         <tr key={stuff.id} className="border-b dark:border-neutral-500">
                                             <td className="whitespace-nowrap px-6 px-4">{id+1}</td>
                                             <td className="whitespace-nowrap px-6 px-4">{stuff.name}</td>
                                             <td className="whitespace-nowrap px-6 px-4">{stuff.category}</td>
                                             {
-                                                stuff.stock ? (
+                                                stuff.stuff_stock ? (
                                                     <td className="whitespace-nowrap px-6 px-4">
-                                                        Total Available: {stuff.stock.total_available} <br />
+                                                        Total Available: {stuff.stuff_stock.total_available} <br />
                                                     </td>
                                                 ) : (
                                                      <td className="whitespace-nowrap px-6 px-4">
@@ -158,7 +159,7 @@ export default function Stuff() {
                                                     </td>
                                                 )
                                             }
-                                            <td className="whitespace-nowrap px-6 px-4">
+                                            <td className="whitespace-nowrap px-6 py-4">
                                                 <button onClick={() => viewStuff(stuff)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>
                                                 <Link to={'/stuff/edit/' + stuff.id} className="px-4 py-2 bg-blue-500 rounded-lg mr-2 font-bold text-white">Edit</Link>
                                                 <button type="button" onClick={() => deleteStuff(stuff.id)} className="px-4 py-2 bg-red-500 rounded-lg mr-2 font-bold text-white">Hapus</button>

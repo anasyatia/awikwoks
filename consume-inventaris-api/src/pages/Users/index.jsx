@@ -36,7 +36,7 @@ export default function User() {
     const deleteUser = (id) => {
         Swal.fire({
             title: 'Apakah kamu yakin?',
-            text: "Item akan dihapus sementara, kamu dapat restore stuff ini di page trash!",
+            text: "Item akan dihapus sementara, kamu dapat restore data ini di page trash!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -137,7 +137,7 @@ export default function User() {
                     <div className="flex mt-4 md:mt-6">
                         <table className="min-w-full text-left text-sm font-light">
                             <thead className="border-b font-medium dark:border-neutral-500 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
+                                <tr className="text-center">
                                     <th scope="col" className="px-6 py-4">No</th>
                                     <th scope="col" className="px-6 py-4">Username</th>
                                     <th scope="col" className="px-6 py-4">Email</th>
@@ -145,7 +145,7 @@ export default function User() {
                                     <th scope="col" className="px-6 py-4">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-black">
+                            <tbody className="text-black text-center">
                                 {users.map((user, id) => (
                                     <tr key={user.id} className="border-b dark:border-neutral-500">
                                         <td className="whitespace-nowrap px-6 py-4">{id+1}</td>

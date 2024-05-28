@@ -106,7 +106,7 @@ export default function Stuff() {
                     <div className="flex mt-4 md:mt-6">
                         <table className="min-w-full text-left text-sm font-light">
                             <thead className="border-b font-medium dark:border-neutral-500 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
+                                <tr className="text-center"> 
                                     <th scope="col" className="px-6 py-4">No</th>
                                     <th scope="col" className="px-6 py-4">Name</th>
                                     <th scope="col" className="px-6 py-4">Total</th>
@@ -115,14 +115,14 @@ export default function Stuff() {
                                     <th scope="col" className="px-6 py-4">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-center">
                                     {inbounds.map((inbound, id) => (
                                         <tr key={inbound.id} className="border-b dark:border-neutral-500">
                                             <td className="whitespace-nowrap px-6 px-4">{id+1}</td>
                                             <td className="whitespace-nowrap px-6 px-4">{inbound.stuff.name}</td>
                                             <td className="whitespace-nowrap px-6 px-4">{inbound.total}</td>
                                             <td className="whitespace-nowrap px-6 px-4">{inbound.date}</td>
-                                            <td className="whitespace-nowrap px-6 px-4">
+                                            <td className="whitespace-nowrap px-6 px-4 flex justify-center items-center py-2">
                                                 <img src={`${inbound.proff_file}`} className="w-16 h-16 object-cover rounded" alt="" />
                                             </td>
                                             <td className="whitespace-nowrap px-6 px-4">

@@ -32,32 +32,39 @@ export default function Navbar() {
     }, [navigate] );
 
     return (
-        <div className="bg-purple-800 py-2">
-            <div className="grid grid-cols-12">
-                <section className="col-span-10 col-start-2">
-                    <div className="flex items-center">
-                        <Link
-                            className="mr-2 text-sm font-semibold uppercase text-white"
-                            to="/"
-                        >
-                            INVENTARIS APP
-                        </Link>
-                        <Link to="/login"><small className="text-white">Login</small></Link>
-                    {
-                        isLogin ? authUser['role'] === 'admin' ? (
+        <div className="bg-purple-800 py-4">
+        <div className="grid grid-cols-12">
+        <section className="col-span-10 col-start-2">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                    <Link
+                        className="mr-2 text-sm font-semibold uppercase text-white"
+                        to="/"
+                    >
+                        INVENTARIS APP
+                    </Link>
+                    <Link to="/login"><small className="text-white">Login</small></Link>
+                    {isLogin ? (
+                        authUser['role'] === 'admin' ? (
                             <>
-                            <Link to="/stuff"><small className="text-white ms-3">Stuff</small></Link>
-                            <Link to="/inbound"><small className="text-white ms-3">Inbound</small></Link>
-                            <Link to="/lending"><small className="text-white ms-3">Lending</small></Link>
-                            <Link to="/users"><small className="text-white ms-3">User</small></Link>
+                                <Link to="/stuff"><small className="text-white ms-3">Stuff</small></Link>
+                                <Link to="/inbound"><small className="text-white ms-3">Inbound</small></Link>
+                                <Link to="/lending"><small className="text-white ms-3">Lending</small></Link>
+                                <Link to="/users"><small className="text-white ms-3">User</small></Link>
                             </>
                         ) : (
-                            <Link to="/"><small className="text-white ms-3">Lending</small></Link>
-                        ) : ''
-                    }
-                    </div>
-                </section>
-            </div>
+                            <Link to="/lending"><small className="text-white ms-3">Lending</small></Link>
+                        )
+                    ) : ''}
+                </div>
+                    {isLogin && (
+                        <div className="flex items-center">
+                            <Link to="/profile" className="text-white ms-3">Profile</Link>
+                        </div>
+                    )}
+                </div>
+            </section>
         </div>
+    </div>
     );
 }

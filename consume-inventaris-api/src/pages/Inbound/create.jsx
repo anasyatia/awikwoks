@@ -111,7 +111,7 @@ export default function InboundCreate() {
                         </div>
                         <div class="mb-5">
                             <label for="proff_file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bukti</label>
-                            <input type="file" id="proff_file" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Ketik Nama Barang" onChange={e => {
+                            <input type="file" id="proff_file" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500" placeholder="Masukkan Foto Barang" onChange={e => {
                                  console.log(e.target.files[0])
                                  forms.append("proff_file", e.target.files[0])
                             }} />
