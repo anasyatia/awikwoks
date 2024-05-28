@@ -37,6 +37,18 @@ export default function Lending() {
         })
     }, [navigate])
 
+    instance.get('http://localhost:8000/profile')
+            .then(res => {
+                setIsLogin(true);
+                setAuthUser(res.data.data);
+            })
+            .catch(err => {
+                setIsLogin(false);
+                if (err.response.status === 401) {
+                    navigate('/login?message=' + encodeURIComponent('Anda Belum Login!'));
+                }
+            });
+
     const viewLending = (lending) => {
         const statusText = lending.status == 0 ? 'Belum Kembali' : 'Sudah Kembali';
     
@@ -58,7 +70,7 @@ export default function Lending() {
                     <strong>Tanggal dipinjam:</strong> ${lending.date_time}
                 </div>
                 <div class="mb-4">
-                    <strong>Tanggal dikembalikan:</strong> ${lendings.restoration ? lendings.restoration.date_time : 'Barang belum dikembalikan!'}
+                    <strong>Tanggal dikembalikan:</strong> ${lending.restoration ? lending.restoration.date_time : 'Barang belum dikembalikan!'}
                 </div>
                 <div class="mb-4">
                     <strong>Notes:</strong> ${lending.notes}
@@ -181,18 +193,36 @@ export default function Lending() {
                                             )}
                                         </td>
                                         <td className="text-center">
-                                            {lending.status == 0 ? (
-                                                <td className="whitespace-nowrap px-6 py-4 justify-center flex">
-                                                <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>
-                                                <button onClick={() => deleteLending(lending.id)} className="px-4 py-2 bg-gray-500 rounded-lg mr-2 font-bold text-white">Batal</button>
-                                                <Link to={'/lending/restoration/' + lending.id} type="button" className="px-4 py-2 bg-green-500 rounded-lg font-bold text-white">Kembali</Link>                                        
-                                            </td>
-                                            ) : (
-                                                <td className="whitespace-nowrap px-6 py-4 justify-center flex">
-                                                <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">Lihat</button>                                        
-                                            </td>
-                                                )}
-                                        </td>
+                                        {isLogin ? (
+                                            authUser['role'] === 'admin' ? (
+                                                <div className="whitespace-nowrap px-6 py-4 justify-center flex">
+                                                    <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">
+                                                        Lihat
+                                                    </button>
+                                                </div>
+                                            ) : authUser['role'] === 'staff' ? (
+                                                lending.status == 0 ? (
+                                                    <div className="whitespace-nowrap px-6 py-4 justify-center flex">
+                                                        <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">
+                                                            Lihat
+                                                        </button>
+                                                        <button onClick={() => deleteLending(lending.id)} className="px-4 py-2 bg-gray-500 rounded-lg mr-2 font-bold text-white">
+                                                            Batal
+                                                        </button>
+                                                        <Link to={'/lending/restoration/' + lending.id} type="button" className="px-4 py-2 bg-green-500 rounded-lg font-bold text-white">
+                                                            Kembali
+                                                        </Link>
+                                                    </div>
+                                                ) : (
+                                                    <div className="whitespace-nowrap px-6 py-4 justify-center flex">
+                                                        <button onClick={() => viewLending(lending)} className="px-4 py-2 bg-purple-500 rounded-lg mr-2 font-bold text-white">
+                                                            Lihat
+                                                        </button>
+                                                    </div>
+                                                )
+                                            ) : null
+                                        ) : null}
+                                    </td>
                                     </tr>
                                 ) )}
                             </tbody>
